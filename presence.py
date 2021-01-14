@@ -1,6 +1,8 @@
 from splinter import Browser
+from time import sleep
 
 browser = Browser('chrome')
+browser.driver.set_window_size(1920, 1080)
 browser.visit('https://www.hltv.org/')
 
 # Presence:
@@ -16,9 +18,9 @@ assert browser.is_element_not_present_by_id('some_id_that_does_not_exist')
 assert browser.is_element_not_present_by_text('Holy Smite')
 
 
-login = browser.find_by_cls('.navsignin')
+login = browser.find_by_css('.navsignin')
 login.click()
 
 # Visibility (only css and xpath here):
-assert browser.is_element_visible_by_css('#forgot-password-username', wait_time=3) 
+assert browser.is_element_visible_by_css('.loginInput', wait_time=3) 
 assert browser.is_element_visible_by_xpath('//input[@class="loginCheckbox "]', wait_time=3)

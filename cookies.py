@@ -1,7 +1,21 @@
 from splinter import Browser
 
-browser = Browser()
+browser = Browser(headless=True, incognito=True)
+browser.visit('https://www.hltv.org/forums/threads/2402923/boredom')
 
 print(dir(browser.cookies))
+print(browser.cookies.all())  # Show all cookies
 
-#['__class__', '__contains__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__gt__', '__hash__', '__init__', '__init_subclass__', '__le__', '__lt__', '__module__', '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', '__subclasshook__', '__weakref__', 'add', 'all', 'delete', 'driver']
+my_cookie = {'foo': 'bar'}
+browser.cookies.add(my_cookie)  # Set cookies via mapping
+
+print(browser.cookies.all())
+print(browser.cookies.all().get('foo')) # Get spicific cookie or `None`
+
+browser.cookies.delete('foo')   # Delete special cookie
+
+print(browser.cookies.all())
+
+browser.cookies.delete()    # Delete all cookies
+
+print(browser.cookies.all())
